@@ -1,0 +1,47 @@
+apply plugin: rootProject.ext.plugin.library
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile rootProject.ext.dependencies.design
+    compile rootProject.ext.dependencies.appCompat
+    compile rootProject.ext.dependencies.rxandroid
+    compile rootProject.ext.dependencies.rxjava
+    compile rootProject.ext.dependencies.recyclerView
+    compile rootProject.ext.dependencies.greendao
+
+    compile rootProject.ext.dependencies.support_v4
+
+    testCompile rootProject.ext.dependencies.test_junit
+
+    //添加android缺失的部分javax注解
+    provided rootProject.ext.dependencies.javax_annotation
+    //dagger公用api
+    compile rootProject.ext.dependencies.dagger
+    //指定注解处理器
+    annotationProcessor rootProject.ext.dependencies.dagger_compliler
+//    apt rootProject.ext.dependencies.dagger_compliler
+
+    androidTestCompile rootProject.ext.dependencies.test_testing_support_lib
+    androidTestCompile rootProject.ext.dependencies.test_runner
+    androidTestCompile rootProject.ext.dependencies.test_rules
+    androidTestCompile rootProject.ext.dependencies.test_espresso_core
+
+}
