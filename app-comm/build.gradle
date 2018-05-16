@@ -39,6 +39,7 @@ dependencies {
     compile rootProject.ext.dependencies.okhttp
     compile rootProject.ext.dependencies.okhttp_logging_interceptor
     compile rootProject.ext.dependencies.okio
+    compile rootProject.ext.dependencies.dagger
 
     testCompile rootProject.ext.dependencies.test_junit
 
@@ -49,10 +50,10 @@ dependencies {
 
     //添加android缺失的部分javax注解
     provided rootProject.ext.dependencies.javax_annotation
-    //dagger公用api
-    compile rootProject.ext.dependencies.dagger
+
     //指定注解处理器
     annotationProcessor rootProject.ext.dependencies.dagger_compliler
+    compile rootProject.ext.dependencies.router
 }
 
 

@@ -1,11 +1,10 @@
 package com.ljj.foolmvp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.ljj.foolmvp.feed.ui.FeedsActivity;
+import com.chenenyu.router.Router;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_local_feeds:
-                startActivity(new Intent(this, FeedsActivity.class));
+//                startActivity(new Intent(this, FeedsActivity.class));
+                Router.build("router://feed/feeds").go(this);
+                break;
         }
     }
 }

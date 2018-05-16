@@ -30,31 +30,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
 
-        <activity
-            android:name=".feed.ui.FeedsActivity"
-            android:label="Feed列表"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
-
-        <activity
-            android:name=".feed.ui.FeedDetailActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing" />
-
-        <activity
-            android:name=".user.ui.UserDetailActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing">
-
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="com.ljj.foolmvp.user.USER_DETAIL" />
-            </intent-filter>
-
-        </activity>
     </application>
 
 </manifest>

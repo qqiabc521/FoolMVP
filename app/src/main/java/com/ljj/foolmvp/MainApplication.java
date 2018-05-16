@@ -3,6 +3,8 @@ package com.ljj.foolmvp;
 
 import android.content.Context;
 
+import com.chenenyu.router.Configuration;
+import com.chenenyu.router.Router;
 import com.ljj.foolmvp.appcomm.BaseApplication;
 import com.ljj.foolmvp.appcomm.di.UserAssistInteractorPlaceholder;
 import com.ljj.foolmvp.appcomm.di.component.AppApplicationComponent;
@@ -35,9 +37,17 @@ public class MainApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
+        setupRouter();
         setupDataBase(getApplicationContext());
         initApplicationComponent();
         initAppComponent();
+    }
+
+    private void setupRouter() {
+        Router.initialize(new Configuration.Builder()
+                .setDebuggable(BuildConfig.DEBUG)
+                .registerModules("app", "app-feed", "app-user")
+                .build());
     }
 
     private void setupDataBase(Context context) {

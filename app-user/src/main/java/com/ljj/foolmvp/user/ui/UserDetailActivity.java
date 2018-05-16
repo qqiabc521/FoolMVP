@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.chenenyu.router.annotation.Route;
 import com.ljj.foolmvp.appcomm.bean.UserBrief;
 import com.ljj.foolmvp.appcomm.config.PageActionConfig;
 import com.ljj.foolmvp.appcomm.entity.Relationship;
@@ -20,6 +21,7 @@ import javax.inject.Inject;
  * Created by lijunjie on 2017/12/21.
  */
 
+@Route("router://user/user_detail")
 public class UserDetailActivity extends BaseUserActivity implements IUserSubView, View.OnClickListener {
 
     private TextView nickNameTV, ageTV, emailTV, phoneTV, signTV;

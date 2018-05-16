@@ -36,6 +36,8 @@ ext {
             javax_annotation          : 'org.glassfish:javax.annotation:10.0-b28',
             dagger                    : 'com.google.dagger:dagger:2.2',
             dagger_compliler          : 'com.google.dagger:dagger-compiler:2.2',
+            router                    : 'com.chenenyu.router:router:1.4.1',
+            router_compliler          : 'com.chenenyu.router:compiler:1.4.0',
 
             test_junit                : 'junit:junit:4.12',
             test_testing_support_lib  : 'com.android.support.test:testing-support-lib:0.1',

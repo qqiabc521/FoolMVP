@@ -23,6 +23,12 @@ android {
             abortOnError false
         }
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["moduleName": project.name]
+            }
+        }
+
         multiDexEnabled true
 
     }
@@ -75,9 +81,8 @@ dependencies {
 
     //添加android缺失的部分javax注解
     provided rootProject.ext.dependencies.javax_annotation
-    //dagger公用api
-    compile rootProject.ext.dependencies.dagger
     //指定注解处理器
     annotationProcessor rootProject.ext.dependencies.dagger_compliler
+    annotationProcessor rootProject.ext.dependencies.router_compliler
 }
 
