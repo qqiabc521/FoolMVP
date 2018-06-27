@@ -121,7 +121,7 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
 ### 特色关注点：
 * 1.Presenter只关注业务结果，请求开始、请求结束、请求异常等操作均有公共基类完成，UI的显示由具体UI决定（基于presenterId作区别）。例如：获得feed详情Presenter
 
-
+```java
             public class FeedDetailPresenterImpl extends BasePresenterImpl<IFeedDetailView> implements FeedDetailPresenter {
                 private FeedInteractor feedInteractor;
             
@@ -165,11 +165,11 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
                     }));
                 }
             }
-
+```
     
 * 2.业务数据改变实时同步。例如：关注用户或取消关注用户，实时同步Feed详情与User详情实时更新。
 
-
+```java
             public class FollowPresenterImpl extends BasePresenterImpl<IFollowView> implements FollowPresenter {
         
                 private UserAssistInteractor userAssistInteractor;
@@ -233,11 +233,11 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
                 }
         
             }
-
+```
 
 * 3.Presenter可拓展、可嵌套使用，即BasePresenterImpl与BaseSubPresenterImpl的继承关系。
 
-
+```java
             public class UserSubPresenterImpl extends BaseSubPresenterImpl<IUserSubView> implements UserSubPresenter,IUserDetailView,IFollowView {
             
                 private UserBean userBean;
@@ -333,10 +333,11 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
                     }
                 }
             }
+```
 
 * 4.在M层中，定义数据接口时，尽量同时定义同步接口与异步接口，异步接口依赖同步接口使用，使M层最大化满足P层的随意调用。
 
-
+```java
             public class FeedInteratorImpl implements FeedInteractor {
             
                 private FeedEntityDao feedEntityDao;
@@ -376,11 +377,12 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
                 
                 ......
             }
+```
 
 * 5.面向接口编程，进行业务逻辑的物理隔离。比如FollowPresenter，依赖UserAssistInteractor，但其实现类UserAssistInteractorImpl在user模块中实现。
 依赖注入贯穿各个业务层中，这时就需要我们在app中对接口与实现类进行注入绑定，UserAssistInteractor接口与UserAssistInteractorImpl实现类通过代理+预埋点的方式将两者关联起来。
 
-
+```java
         @Module
         public class ApiModule {
             private DaoMaster daoMaster;
@@ -493,7 +495,7 @@ Presenter的一个委派类，为了简化RequestCallBack的实现类，使Reque
                 return mApplicationComponent;
             }
         }
-        
+```    
         
         
 后续将会持续完善该框架，如：
