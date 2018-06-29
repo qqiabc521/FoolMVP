@@ -31,7 +31,7 @@ ext {
             retrofit2_adapter         : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
             okhttp                    : 'com.squareup.okhttp3:okhttp:3.9.0',
             okhttp_logging_interceptor: 'com.squareup.okhttp3:logging-interceptor:3.9.0',
-            okio                   : 'com.squareup.okio:okio:1.0.0',
+            okio                      : 'com.squareup.okio:okio:1.0.0',
             greendao                  : 'org.greenrobot:greendao:3.2.2',
             javax_annotation          : 'org.glassfish:javax.annotation:10.0-b28',
             dagger                    : 'com.google.dagger:dagger:2.2',
@@ -44,5 +44,6 @@ ext {
             test_runner               : 'com.android.support.test:runner:1.0.1',
             test_rules                : 'com.android.support.test:rules:1.0.1',
             test_espresso_core        : 'com.android.support.test.espresso:espresso-core:3.0.1',
+            test_mockito_all          : 'org.mockito:mockito-all:1.10.19'
     ]
 }

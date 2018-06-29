@@ -4,12 +4,13 @@ package com.ljj.foolmvp.appcomm.util;
 import com.ljj.foolmvp.appcomm.network.ExceptionConsumer;
 import com.ljj.foolmvp.appcomm.network.HttpResult;
 import com.ljj.foolmvp.appcomm.network.HttpResultFunc;
-import com.ljj.foolmvp.core.PresenterDelegate;
 import com.ljj.foolmvp.callback.RequestCallBack;
+import com.ljj.foolmvp.core.PresenterDelegate;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -22,6 +23,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxUtils {
 
+    //为解决单元测试不依赖android环境，默认不指明callbackScheduler 为AndroidSchedulers.mainThread()
+    private static Scheduler callbackScheduler = null;
+
+    public static void setCallbackScheduler(Scheduler scheduler) {
+        callbackScheduler = scheduler;
+    }
+
+    public static Scheduler getCallbackScheduler() {
+        return callbackScheduler;
+    }
+
     public static <T> ObservableTransformer<T, T> defaultSchedulers() {
         return new ObservableTransformer<T, T>() {
 
@@ -30,7 +42,7 @@ public class RxUtils {
                 return upstream
                         .unsubscribeOn(Schedulers.io())
                         .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                        .observeOn(getCallbackScheduler());
             }
         };
     }
@@ -43,7 +55,7 @@ public class RxUtils {
         return observable
                 .unsubscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(getCallbackScheduler())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
@@ -82,7 +94,7 @@ public class RxUtils {
     public static <T> Disposable defaultCallback(Observable<T> observable, final PresenterDelegate presenterDelegate, final RxResult<T> rxResult) {
         return observable
                 .unsubscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override

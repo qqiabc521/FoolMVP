@@ -24,11 +24,12 @@ import io.reactivex.functions.Function;
 
 public class UserInteratorImpl implements UserInteractor, UserAssistInteractor {
 
-    @Inject
-    protected UserEntityDao userEntityDao;
+    private UserEntityDao userEntityDao;
 
     @Inject
-    public UserInteratorImpl() {}
+    public UserInteratorImpl(UserEntityDao userEntityDao) {
+        this.userEntityDao = userEntityDao;
+    }
 
     /**
      * 添加一条User

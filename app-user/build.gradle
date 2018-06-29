@@ -30,11 +30,13 @@ dependencies {
     compile project(':app-comm')
 
     testCompile rootProject.ext.dependencies.test_junit
+    testCompile rootProject.ext.dependencies.test_mockito_all
 
     androidTestCompile rootProject.ext.dependencies.test_testing_support_lib
     androidTestCompile rootProject.ext.dependencies.test_runner
     androidTestCompile rootProject.ext.dependencies.test_rules
     androidTestCompile rootProject.ext.dependencies.test_espresso_core
+    androidTestCompile rootProject.ext.dependencies.test_mockito_all
 
     //添加android缺失的部分javax注解
     provided rootProject.ext.dependencies.javax_annotation
