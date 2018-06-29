@@ -30,6 +30,8 @@ public class UserInteratorImplTest {
 
     @Before
     public void setUp() throws Exception {
+        System.out.println("setUp");
+
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
@@ -41,6 +43,7 @@ public class UserInteratorImplTest {
         userInterator = new UserInteratorImpl(userEntityDao);
 
         UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
         userEntity.setAge(10);
         userEntity.setDescription(null);
         userEntity.setEmail("abc@163.com");
@@ -53,6 +56,7 @@ public class UserInteratorImplTest {
 
     @After
     public void tearDown() throws Exception {
+        System.out.println("tearDown");
     }
 
 
@@ -72,7 +76,6 @@ public class UserInteratorImplTest {
             @Override
             public void onNext(Long aLong) {
                 System.out.println("onNext :"+aLong);
-                assert true;
             }
 
             @Override
@@ -87,6 +90,40 @@ public class UserInteratorImplTest {
             }
         });
     }
+
+//    @Test
+//    public void saveAndGetUser() {
+//        System.out.println("================= saveUser ===================");
+//        userInterator.saveUser(tempUserEntity).flatMap(new Function<Long, Observable<UserEntity>>() {
+//            @Override
+//            public Observable<UserEntity> apply(Long aLong) throws Exception {
+//                System.out.println("flatMap apply :"+aLong);
+//                return userInterator.getUser(aLong);
+//            }
+//        }).subscribe(new Observer<UserEntity>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//                System.out.println("onSubscribe :"+d);
+//            }
+//
+//            @Override
+//            public void onNext(UserEntity user) {
+//                System.out.println("onNext :"+user);
+//                assertThat(user.getName(),is(tempUserEntity.getName()));
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                System.out.println("onError :"+e.getMessage());
+//                assert false;
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                System.out.println("onComplete");
+//            }
+//        });
+//    }
 
     @Test
     public void saveUserSync(){

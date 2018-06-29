@@ -10,6 +10,8 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 }
 
@@ -42,6 +44,8 @@ dependencies {
     compile rootProject.ext.dependencies.dagger
 
     testCompile rootProject.ext.dependencies.test_junit
+    testCompile rootProject.ext.dependencies.test_mockito_all
+    testCompile rootProject.ext.dependencies.hamcrest_all
 
     androidTestCompile rootProject.ext.dependencies.test_testing_support_lib
     androidTestCompile rootProject.ext.dependencies.test_runner
@@ -55,5 +59,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.dagger_compliler
     compile rootProject.ext.dependencies.router
 }
+
 
 

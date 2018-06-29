@@ -6,11 +6,11 @@ ext {
 
     android = [
             applicationId    : "com.ljj.foolmvp",
-            compileSdkVersion: 26,
-            buildToolsVersion: "26.0.2",
+            compileSdkVersion: 27,
+            buildToolsVersion: "27.0.1",
 
             minSdkVersion    : 17,
-            targetSdkVersion : 25,
+            targetSdkVersion : 26,
 
             versionCode      : 1,
             versionName      : "0.0.1",
@@ -44,6 +44,7 @@ ext {
             test_runner               : 'com.android.support.test:runner:1.0.1',
             test_rules                : 'com.android.support.test:rules:1.0.1',
             test_espresso_core        : 'com.android.support.test.espresso:espresso-core:3.0.1',
-            test_mockito_all          : 'org.mockito:mockito-all:1.10.19'
+            test_mockito_all          : 'org.mockito:mockito-all:1.10.19',
+            hamcrest_all              : 'org.hamcrest:hamcrest-all:1.3'
     ]
 }
