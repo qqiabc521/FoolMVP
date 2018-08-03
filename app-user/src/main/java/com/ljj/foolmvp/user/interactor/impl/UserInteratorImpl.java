@@ -1,5 +1,10 @@
 package com.ljj.foolmvp.user.interactor.impl;
 
+import android.content.Context;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.ljj.foolmvp.appcomm.db.DbService;
 import com.ljj.foolmvp.appcomm.entity.Relationship;
 import com.ljj.foolmvp.appcomm.entity.UserEntity;
 import com.ljj.foolmvp.appcomm.interactor.UserAssistInteractor;
@@ -22,13 +27,14 @@ import io.reactivex.functions.Function;
  * Created by lijunjie on 2017/12/28.
  */
 
+@Route(path="/user/user_interactor")
 public class UserInteratorImpl implements UserInteractor, UserAssistInteractor {
 
     private UserEntityDao userEntityDao;
 
     @Inject
-    public UserInteratorImpl(UserEntityDao userEntityDao) {
-        this.userEntityDao = userEntityDao;
+    public UserInteratorImpl() {
+        this.userEntityDao = ARouter.getInstance().navigation(DbService.class).getUserEntityDao();
     }
 
     /**
@@ -186,4 +192,13 @@ public class UserInteratorImpl implements UserInteractor, UserAssistInteractor {
         });
     }
 
+    /**
+     * Do your init work in this method, it well be call when processor has been load.
+     *
+     * @param context ctx
+     */
+    @Override
+    public void init(Context context) {
+
+    }
 }

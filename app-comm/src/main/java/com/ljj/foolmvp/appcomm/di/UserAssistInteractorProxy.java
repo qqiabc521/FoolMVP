@@ -1,5 +1,7 @@
 package com.ljj.foolmvp.appcomm.di;
 
+import android.content.Context;
+
 import com.ljj.foolmvp.appcomm.entity.Relationship;
 import com.ljj.foolmvp.appcomm.interactor.UserAssistInteractor;
 import com.ljj.foolmvp.callback.RequestCallBack;
@@ -42,5 +44,15 @@ public class UserAssistInteractorProxy implements UserAssistInteractor {
     @Override
     public Observable<Boolean> updateUserRelation(long userId, Relationship relationship) {
         return userAssistInteractor.updateUserRelation(userId, relationship);
+    }
+
+    /**
+     * Do your init work in this method, it well be call when processor has been load.
+     *
+     * @param context ctx
+     */
+    @Override
+    public void init(Context context) {
+
     }
 }

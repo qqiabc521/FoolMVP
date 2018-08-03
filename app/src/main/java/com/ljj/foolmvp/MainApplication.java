@@ -2,85 +2,75 @@ package com.ljj.foolmvp;
 
 
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
-import com.chenenyu.router.Configuration;
-import com.chenenyu.router.Router;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ljj.foolmvp.appcomm.BaseApplication;
-import com.ljj.foolmvp.appcomm.di.UserAssistInteractorPlaceholder;
+import com.ljj.foolmvp.appcomm.ILoader;
 import com.ljj.foolmvp.appcomm.di.component.AppApplicationComponent;
 import com.ljj.foolmvp.appcomm.di.component.DaggerAppApplicationComponent;
 import com.ljj.foolmvp.appcomm.di.module.ApiModule;
-import com.ljj.foolmvp.di.component.DaggerAppComponent;
 import com.ljj.foolmvp.di.module.ApplicationModule;
-import com.ljj.foolmvp.feed.FeedGlobal;
-import com.ljj.foolmvp.feed.di.module.FeedApiModule;
-import com.ljj.foolmvp.greendao.DaoMaster;
-import com.ljj.foolmvp.user.UserGlobal;
-import com.ljj.foolmvp.user.di.module.UserApiModule;
 
-import org.greenrobot.greendao.database.Database;
+import java.util.ArrayList;
 
 /**
  * Created by lijunjie on 2017/12/21.
  */
 
 public class MainApplication extends BaseApplication {
+
     private AppApplicationComponent mApplicationComponent;
 
-    private static final String DATA_BASE_ANME = "fool_mvp.db";
+    private ArrayList<ILoader> loaders = new ArrayList<>();
 
-    private static DaoMaster mDaoMaster;
-
-    private UserAssistInteractorPlaceholder userAssistInteractorPlaceholder;
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         setupRouter();
-        setupDataBase(getApplicationContext());
         initApplicationComponent();
-        initAppComponent();
+
+        initLib();
+        initLoaders();
     }
 
     private void setupRouter() {
-        Router.initialize(new Configuration.Builder()
-                .setDebuggable(BuildConfig.DEBUG)
-                .registerModules("app", "app-feed", "app-user")
-                .build());
+        if (isLoggable()) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
     }
 
-    private void setupDataBase(Context context) {
-        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context, DATA_BASE_ANME);
-        Database db = devOpenHelper.getWritableDb();
-        mDaoMaster = new DaoMaster(db);
+    private void initLib(){
+
     }
 
-    /**
-     * 初始化主应用注入组件
-     */
-    private void initAppComponent() {
-        UserApiModule userApiModule = new UserApiModule();
-        FeedApiModule feedApiModule = new FeedApiModule();
+    private void registerLoader(ILoader loader){
+        loaders.add(loader);
+    }
 
-        UserGlobal.init(userApiModule);
-        FeedGlobal.init(feedApiModule);
-
-        DaggerAppComponent.builder().appApplicationComponent(mApplicationComponent)
-                .userApiModule(userApiModule)
-                .feedApiModule(feedApiModule).build();
-
-        userAssistInteractorPlaceholder.setUserAssistInteractorProxy(UserGlobal.getUserComponent().getUserAssistInteractorProxy());
+    private void initLoaders(){
+        for(ILoader loader : loaders){
+            if(loader != null){
+                loader.init();
+            }
+        }
     }
 
     /**
      * 初始化应用公共注入组件
      */
     private void initApplicationComponent() {
-        userAssistInteractorPlaceholder = new UserAssistInteractorPlaceholder();
         mApplicationComponent = DaggerAppApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .apiModule(new ApiModule(mDaoMaster, userAssistInteractorPlaceholder))
+                .apiModule(new ApiModule(null, null))
                 .build();
     }
 

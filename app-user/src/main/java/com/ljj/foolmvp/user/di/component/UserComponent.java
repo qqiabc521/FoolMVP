@@ -1,7 +1,6 @@
 package com.ljj.foolmvp.user.di.component;
 
 
-import com.ljj.foolmvp.appcomm.di.UserAssistInteractorProxy;
 import com.ljj.foolmvp.appcomm.di.component.AppApplicationComponent;
 import com.ljj.foolmvp.di.module.ActivityModule;
 import com.ljj.foolmvp.di.scope.PerApp;
@@ -23,7 +22,7 @@ public interface UserComponent {
 
     UserInteractor getUserInteractor();
 
-    UserAssistInteractorProxy getUserAssistInteractorProxy();
+//    UserAssistInteractorProxy getUserAssistInteractorProxy();
 
     UserActivityComponent addSub(ActivityModule activityModule);
 

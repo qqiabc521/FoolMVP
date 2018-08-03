@@ -12,6 +12,12 @@ android {
         versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["moduleName": project.name]
+            }
+        }
     }
 }
 
@@ -34,6 +40,7 @@ dependencies {
 
     compile project(':foolmvp-lib')
 
+//    compile rootProject.ext.dependencies.multidex
     compile rootProject.ext.dependencies.design
     compile rootProject.ext.dependencies.fastjson
     compile rootProject.ext.dependencies.retrofit2
@@ -57,6 +64,7 @@ dependencies {
 
     //指定注解处理器
     annotationProcessor rootProject.ext.dependencies.dagger_compliler
+    annotationProcessor rootProject.ext.dependencies.router_compliler
     compile rootProject.ext.dependencies.router
 }
 

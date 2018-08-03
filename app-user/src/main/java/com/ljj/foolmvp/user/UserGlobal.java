@@ -14,13 +14,13 @@ public class UserGlobal {
     private static volatile UserComponent mUserComponent;
 
     public static UserComponent getUserComponent() {
-        if(mUserComponent == null){
-            synchronized (UserGlobal.class){
-                if(mUserComponent == null){
-                    init(new UserApiModule());
-                }
-            }
-        }
+//        if(mUserComponent == null){
+//            synchronized (UserGlobal.class){
+//                if(mUserComponent == null){
+//                    init(new UserApiModule());
+//                }
+//            }
+//        }
         return mUserComponent;
     }
 

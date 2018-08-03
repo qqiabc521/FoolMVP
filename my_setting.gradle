@@ -1,0 +1,19 @@
+//先加载local.properties文件
+Properties localProperties = new Properties()
+try {
+    def localFile = project.rootProject.file("local.properties")
+    if (localFile != null && localFile.exists()) {
+        localProperties.load(localFile.newDataInputStream())
+    }
+} catch (Exception e) {
+    e.printStackTrace()
+}
+def runAsApp = ext.has("libRunAsApp")
+if(runAsApp){
+    runAsApp = ext.get("libRunAsApp")
+}
+if(runAsApp){
+    apply plugin: rootProject.ext.plugin.library
+}else{
+    apply plugin: rootProject.ext.plugin.application
+}

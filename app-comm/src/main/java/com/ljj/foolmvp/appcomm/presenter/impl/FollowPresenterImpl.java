@@ -1,5 +1,6 @@
 package com.ljj.foolmvp.appcomm.presenter.impl;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ljj.foolmvp.appcomm.busbean.UpdateRelationship;
 import com.ljj.foolmvp.appcomm.entity.Relationship;
 import com.ljj.foolmvp.appcomm.interactor.UserAssistInteractor;
@@ -20,11 +21,13 @@ import io.reactivex.functions.Consumer;
 
 public class FollowPresenterImpl extends BasePresenterImpl<IFollowView> implements FollowPresenter {
 
+//    @Autowired(name = "/user/user_interactor")
     private UserAssistInteractor userAssistInteractor;
 
     @Inject
-    public FollowPresenterImpl(UserAssistInteractor userAssistInteractor) {
-        this.userAssistInteractor = userAssistInteractor;
+    public FollowPresenterImpl() {
+        userAssistInteractor = (UserAssistInteractor) ARouter.getInstance().build("/user/user_interactor").navigation();
+//        ARouter.getInstance().inject(this);
     }
 
     /**

@@ -1,8 +1,8 @@
 apply plugin: rootProject.ext.plugin.application
+apply plugin: 'auto-register'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
@@ -52,11 +52,11 @@ android {
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
     }
@@ -84,5 +84,16 @@ dependencies {
     //指定注解处理器
     annotationProcessor rootProject.ext.dependencies.dagger_compliler
     annotationProcessor rootProject.ext.dependencies.router_compliler
+}
+
+autoregister {
+    registerInfo = [
+            [
+                    'scanInterface'             : 'com.ljj.foolmvp.appcomm.ILoader'
+                    , 'codeInsertToClassName'   : 'com.ljj.foolmvp.MainApplication'
+                    , 'codeInsertToMethodName'  : 'initLib' //非static方法
+                    , 'registerMethodName'      : 'registerLoader' //非static方法
+            ]
+    ]
 }
 

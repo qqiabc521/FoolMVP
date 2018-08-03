@@ -1,6 +1,8 @@
 package com.ljj.foolmvp.feed.interactor.impl;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ljj.foolmvp.appcomm.config.Constants;
+import com.ljj.foolmvp.appcomm.db.DbService;
 import com.ljj.foolmvp.appcomm.entity.FeedEntity;
 import com.ljj.foolmvp.appcomm.util.RxUtils;
 import com.ljj.foolmvp.callback.RequestCallBack;
@@ -24,8 +26,8 @@ public class FeedInteratorImpl implements FeedInteractor {
     private FeedEntityDao feedEntityDao;
 
     @Inject
-    public FeedInteratorImpl(FeedEntityDao feedEntityDao) {
-        this.feedEntityDao = feedEntityDao;
+    public FeedInteratorImpl() {
+        this.feedEntityDao = ARouter.getInstance().navigation(DbService.class).getFeedEntityDao();
     }
 
     /**

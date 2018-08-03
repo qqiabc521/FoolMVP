@@ -14,13 +14,13 @@ public class FeedGlobal {
     private static volatile FeedComponent mFeedComponent;
 
     public static FeedComponent getFeedComponent() {
-        if(mFeedComponent == null){
-            synchronized (FeedGlobal.class){
-                if(mFeedComponent == null){
-                    init(new FeedApiModule());
-                }
-            }
-        }
+//        if(mFeedComponent == null){
+//            synchronized (FeedGlobal.class){
+//                if(mFeedComponent == null){
+//                    init(new FeedApiModule());
+//                }
+//            }
+//        }
         return mFeedComponent;
     }
 

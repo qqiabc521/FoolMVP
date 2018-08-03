@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.chenenyu.router.Router;
-import com.chenenyu.router.annotation.Route;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ljj.foolmvp.appcomm.adapter.OnItemClickListener;
 import com.ljj.foolmvp.appcomm.bean.FeedBrief;
 import com.ljj.foolmvp.feed.R;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-@Route("router://feed/feeds")
+@Route(path="/feed/feeds")
 public class FeedsActivity extends BaseFeedActivity implements IFeedsView{
     private RecyclerView mRecyclerView;
     private FeedAdapter mFeedAdapter;
@@ -55,7 +55,7 @@ public class FeedsActivity extends BaseFeedActivity implements IFeedsView{
             public void onClick(FeedBrief feedBrief, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putLong("feed_id",feedBrief.getId());
-                Router.build("router://feed/feed_detail").with(bundle).go(FeedsActivity.this);
+                ARouter.getInstance().build("/feed/feed_detail").with(bundle).navigation(FeedsActivity.this);
 //                startActivity(FeedDetailActivity.createIntent(FeedsActivity.this,feedBrief.getId()));
             }
         });

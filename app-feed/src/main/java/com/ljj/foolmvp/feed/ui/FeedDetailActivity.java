@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.chenenyu.router.Router;
-import com.chenenyu.router.annotation.Route;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ljj.foolmvp.appcomm.bean.UserBrief;
 import com.ljj.foolmvp.appcomm.entity.Relationship;
 import com.ljj.foolmvp.appcomm.presenter.impl.FollowPresenterImpl;
@@ -27,7 +27,7 @@ import javax.inject.Inject;
  * Created by lijunjie on 2018/1/2.
  */
 
-@Route("router://feed/feed_detail")
+@Route(path="/feed/feed_detail")
 public class FeedDetailActivity extends BaseFeedActivity implements IFeedDetailView, IFollowView, View.OnClickListener {
     private static final String FEED_ID = "feed_id";
 
@@ -125,7 +125,7 @@ public class FeedDetailActivity extends BaseFeedActivity implements IFeedDetailV
 //            intent.putExtra(PageActionConfig.ACTION_USER_DETAIL_EXTRA_USER, feedBean.getOwner());
 //            startActivity(intent);
 
-            Router.build("router://user/user_detail").with("user", feedBean.getOwner()).go(FeedDetailActivity.this);
+            ARouter.getInstance().build("/user/user_detail").withParcelable("user", feedBean.getOwner()).navigation(this);
         } else if (v.getId() == R.id.feed_detail_follow_user) {
             UserBrief userBrief = feedBean.getOwner();
             if (userBrief != null) {
